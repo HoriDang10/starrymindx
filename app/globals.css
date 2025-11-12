@@ -1,0 +1,158 @@
+@import "tailwindcss";
+/*@import "tw-animate-css";*/
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --animate-shiny-text: shiny-text 8s infinite;
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
+  --animate-meteor: meteor 5s linear infinite
+;
+  @keyframes meteor {
+  0% {
+    transform: rotate(var(--angle)) translateX(0);
+    opacity: 1;}
+  70% {
+    opacity: 1;}
+  100% {
+    transform: rotate(var(--angle)) translateX(-500px);
+    opacity: 0;}}}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Starry Night – light mode (ban ngày hoặc tribute mode) */
+  --background: #f9f7ef;          /* kem sáng */
+  --foreground: #0b1220;          /* xanh đêm – text chính */
+  --card: #fffbea;
+  --card-foreground: #0b1220;
+  --popover: #fffbe8;
+  --popover-foreground: #0b1220;
+
+  --primary: #ffd46b;             /* vàng trăng Van Gogh */
+  --primary-foreground: #0b1220;
+
+  --secondary: #0f2042;           /* xanh lam đậm */
+  --secondary-foreground: #ffe9a3;
+
+  --muted: #d9e1f2;
+  --muted-foreground: #384868;
+
+  --accent: #ffe9a3;              /* vàng kem */
+  --accent-foreground: #0b1220;
+
+  --destructive: #ff6b4a;
+  --border: #d1cfc7;
+  --input: #e5e3dc;
+  --ring: #ffd46b;
+
+  --chart-1: #ffd46b;
+  --chart-2: #ffe9a3;
+  --chart-3: #0f2042;
+  --chart-4: #5f7ecf;
+  --chart-5: #93a6e8;
+
+  --sidebar: #fff9df;
+  --sidebar-foreground: #0b1220;
+  --sidebar-primary: #ffd46b;
+  --sidebar-primary-foreground: #0b1220;
+  --sidebar-accent: #ffe9a3;
+  --sidebar-accent-foreground: #0b1220;
+  --sidebar-border: #f0e9c9;
+  --sidebar-ring: #ffd46b;
+}
+
+.dark {
+  /* Starry Night – dark mode (bầu trời đêm Van Gogh) */
+  --background: #0b1220;          /* xanh đêm */
+  --foreground: #ffe9a3;          /* kem sáng */
+  --card: #0f2042;                /* xanh lam trung */
+  --card-foreground: #ffe9a3;
+  --popover: #0f2042;
+  --popover-foreground: #ffe9a3;
+
+  --primary: #ffd46b;             /* ánh trăng */
+  --primary-foreground: #0b1220;
+
+  --secondary: #102a56;
+  --secondary-foreground: #ffe9a3;
+
+  --muted: #182a48;
+  --muted-foreground: #a3b4df;
+
+  --accent: #ffd46b;
+  --accent-foreground: #0b1220;
+
+  --destructive: #ff6b4a;
+  --border: #22345e;
+  --input: #22345e;
+  --ring: #ffe9a3;
+
+  --chart-1: #ffd46b;
+  --chart-2: #ffe9a3;
+  --chart-3: #0f2042;
+  --chart-4: #304b7f;
+  --chart-5: #93a6e8;
+
+  --sidebar: #0b1220;
+  --sidebar-foreground: #ffe9a3;
+  --sidebar-primary: #ffd46b;
+  --sidebar-primary-foreground: #0b1220;
+  --sidebar-accent: #ffe9a3;
+  --sidebar-accent-foreground: #0b1220;
+  --sidebar-border: #22345e;
+  --sidebar-ring: #ffd46b;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
