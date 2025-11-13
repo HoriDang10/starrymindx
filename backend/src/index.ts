@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-
+import dotenv from "dotenv";
+dotenv.config();
 // Import routes
 import aiRouter from "./routes/ai";
 import quizRouter from "./routes/quiz";

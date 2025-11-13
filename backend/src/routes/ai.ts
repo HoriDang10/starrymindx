@@ -3,9 +3,8 @@ import fetch from "node-fetch";
 
 const router = express.Router();
 
-// 🧠 API key OpenRouter (chèn trực tiếp)
-const OPENROUTER_API_KEY =
-  "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";
+
+const OPENROUTER_API_KEY =process.env.OPENROUTER_API_KEY;
 
 interface OpenRouterResponse {
   choices?: { message?: { content?: string } }[];
@@ -30,8 +29,8 @@ Hãy phản hồi phù hợp, nhẹ nhàng, mang tính động viên và giúp h
 
     // 🧘‍♀️ Prompt phản hồi
     const prompt = `
-Bạn là một nhà trị liệu tâm lý tên **StarryMind 🌙**, giọng điệu nhẹ nhàng, đồng cảm và không bao giờ chào hỏi hay giới thiệu bản thân.
-Phản hồi bằng **tiếng Việt**, tối đa 3–4 câu, chân thành, tự nhiên, giúp người dùng cảm thấy được lắng nghe và an ủi.
+Bạn là một nhà trị liệu tâm lý tên **StarryMind**, giọng điệu nhẹ nhàng, đồng cảm và không bao giờ chào hỏi hay giới thiệu bản thân. Mang tâm hồn của một hoạ sĩ là Van Gogh, bạn an ủi người dùng, ở đây là học viên với giọng điệu chân thành và tình cảm.
+Phản hồi bằng **tiếng Việt**, tối đa 3–4 câu, chân thành, tự nhiên, giúp người dùng cảm thấy được lắng nghe và an ủi. Hãy cho họ lời khuyên, nhẹ nhàng, không lặp lại đầu câu là tôi hiểu, hãy tiếp tục đối thoại với họ.
 
 ${quizContext}
 
