@@ -9,7 +9,7 @@ import { paintings } from "./paintings";
 export default function PaintingSelector() {
   const router = useRouter();
   const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1); // 1: next, -1: prev
+  const [direction, setDirection] = useState(1);
 
   // 🎞️ Auto slide every 4 seconds
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function PaintingSelector() {
       "starry-night": "/quiz/starrynight",
       "bedroom-in-arles": "/quiz/bedroom",
       "sorrowing-old-man": "/quiz/enternityGate",
-      "wheatfield-with-crows": "/quiz/wheatfield", // nếu có quiz này sau
+      "wheatfield-with-crows": "/quiz/wheatfield",
     };
 
     router.push(routeMap[id] || "/");
@@ -47,16 +47,34 @@ export default function PaintingSelector() {
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={index}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.5 },
-            }}
             className="absolute w-full h-full"
+            
+            // 🟦 initial state
+            initial={{
+              x: direction > 0 ? 300 : -300,
+              opacity: 0,
+              scale: 0.95,
+            }}
+
+            // 🟩 animate to center
+            animate={{
+              x: 0,
+              opacity: 1,
+              scale: 1,
+            }}
+
+            // 🟥 exit state
+            exit={{
+              x: direction > 0 ? -300 : 300,
+              opacity: 0,
+              scale: 0.95,
+            }}
+
+            // ⚡ smooth animation
+            transition={{
+              duration: 0.7,
+              ease: "easeInOut",
+            }}
           >
             <img
               src={currentPainting.src}
@@ -66,6 +84,7 @@ export default function PaintingSelector() {
                 currentPainting.position ?? ""
               } cursor-pointer`}
             />
+
             <div className="absolute bottom-0 left-0 right-0 p-4 text-center bg-background/60 backdrop-blur-sm">
               <div className="translate-y-[-6px]">
                 <p className="text-lg font-semibold text-foreground mb-1">
@@ -114,28 +133,3 @@ export default function PaintingSelector() {
     </section>
   );
 }
-
-// 🎬 Netflix-like transition variants
-const slideVariants: Variants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 300 : -300,
-    opacity: 0,
-    scale: 0.95,
-  }),
-
-  center: {
-    x: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 1,
-      ease: "easeInOut",
-    },
-  },
-
-  exit: (direction: number) => ({
-    x: direction > 0 ? -300 : 300,
-    opacity: 0,
-    scale: 0.95,
-  }),
-};
