@@ -116,21 +116,23 @@ export default function PaintingSelector() {
 }
 
 // 🎬 Netflix-like transition variants
-const slideVariants = {
+const slideVariants: Variants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 300 : -300,
     opacity: 0,
     scale: 0.95,
   }),
+
   center: {
     x: 0,
     opacity: 1,
     scale: 1,
     transition: {
       duration: 1,
-      ease: "easeInOut",  // FIX: không dùng mảng nữa
+      ease: "easeInOut",
     },
   },
+
   exit: (direction: number) => ({
     x: direction > 0 ? -300 : 300,
     opacity: 0,
