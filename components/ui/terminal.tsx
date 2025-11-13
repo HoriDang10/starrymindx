@@ -9,7 +9,10 @@ import {
   useRef,
   useState,
 } from "react"
-import { motion, MotionProps, useInView } from "motion/react"
+
+// ❗ FIXED: đúng module cho Next.js client component
+import { motion, useInView } from "framer-motion"
+import type { MotionProps } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -20,7 +23,6 @@ interface SequenceContextValue {
 }
 
 const SequenceContext = createContext<SequenceContextValue | null>(null)
-
 const useSequence = () => useContext(SequenceContext)
 
 const ItemIndexContext = createContext<number | null>(null)
@@ -41,7 +43,7 @@ export const AnimatedSpan = ({
   ...props
 }: AnimatedSpanProps) => {
   const elementRef = useRef<HTMLDivElement | null>(null)
-  const isInView = useInView(elementRef as React.RefObject<Element>, {
+  const isInView = useInView(elementRef, {
     amount: 0.3,
     once: true,
   })
@@ -49,6 +51,7 @@ export const AnimatedSpan = ({
   const sequence = useSequence()
   const itemIndex = useItemIndex()
   const [hasStarted, setHasStarted] = useState(false)
+
   useEffect(() => {
     if (!sequence || itemIndex === null) return
     if (!sequence.sequenceStarted) return
@@ -98,7 +101,7 @@ export const TypingAnimation = ({
   ...props
 }: TypingAnimationProps) => {
   if (typeof children !== "string") {
-    throw new Error("TypingAnimation: children must be a string. Received:")
+    throw new Error("TypingAnimation: children must be a string.")
   }
 
   const MotionComponent = useMemo(
@@ -109,10 +112,11 @@ export const TypingAnimation = ({
     [Component]
   )
 
-  const [displayedText, setDisplayedText] = useState<string>("")
+  const [displayedText, setDisplayedText] = useState("")
   const [started, setStarted] = useState(false)
+
   const elementRef = useRef<HTMLElement | null>(null)
-  const isInView = useInView(elementRef as React.RefObject<Element>, {
+  const isInView = useInView(elementRef, {
     amount: 0.3,
     once: true,
   })
@@ -159,15 +163,11 @@ export const TypingAnimation = ({
         i++
       } else {
         clearInterval(typingEffect)
-        if (sequence && itemIndex !== null) {
-          sequence.completeItem(itemIndex)
-        }
+        if (sequence && itemIndex !== null) sequence.completeItem(itemIndex)
       }
     }, duration)
 
-    return () => {
-      clearInterval(typingEffect)
-    }
+    return () => clearInterval(typingEffect)
   }, [children, duration, started])
 
   return (
@@ -195,7 +195,7 @@ export const Terminal = ({
   startOnView = true,
 }: TerminalProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const isInView = useInView(containerRef as React.RefObject<Element>, {
+  const isInView = useInView(containerRef, {
     amount: 0.3,
     once: true,
   })
@@ -207,7 +207,9 @@ export const Terminal = ({
     if (!sequence) return null
     return {
       completeItem: (index: number) => {
-        setActiveIndex((current) => (index === current ? current + 1 : current))
+        setActiveIndex((current) =>
+          index === current ? current + 1 : current
+        )
       },
       activeIndex,
       sequenceStarted: sequenceHasStarted,
@@ -216,8 +218,7 @@ export const Terminal = ({
 
   const wrappedChildren = useMemo(() => {
     if (!sequence) return children
-    const array = Children.toArray(children)
-    return array.map((child, index) => (
+    return Children.toArray(children).map((child, index) => (
       <ItemIndexContext.Provider key={index} value={index}>
         {child as React.ReactNode}
       </ItemIndexContext.Provider>
