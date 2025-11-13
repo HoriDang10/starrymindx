@@ -126,7 +126,10 @@ const slideVariants = {
     x: 0,
     opacity: 1,
     scale: 1,
-    transition: { duration: 1, ease: [0.2, 0.1, 0.25, 1] },
+    transition: {
+      duration: 1,
+      ease: "easeInOut",  // FIX: không dùng mảng nữa
+    },
   },
   exit: (direction: number) => ({
     x: direction > 0 ? -300 : 300,
