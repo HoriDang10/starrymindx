@@ -83,7 +83,7 @@ export default function WheatfieldQuiz() {
     setError(null);
 
     try {
-      const res = await fetch("http://localhost:3001/routes/quiz/wheatfield", {
+      const res = await fetch("https://starrymindx-production.up.railway.app/routes/quiz/wheatfield", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ answers }),

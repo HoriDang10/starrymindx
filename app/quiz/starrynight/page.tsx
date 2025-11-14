@@ -81,7 +81,7 @@ export default function StarryNightQuiz() {
     setError(null);
 
     try {
-      const res = await fetch("http://localhost:3001/routes/quiz/starry-night", {
+      const res = await fetch("https://starrymindx-production.up.railway.app/routes/quiz/starry-night", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ answers }),

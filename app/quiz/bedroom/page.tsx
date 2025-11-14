@@ -100,7 +100,7 @@ export default function BedroomQuiz() {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 8000);
 
-      const res = await fetch("http://localhost:3001/routes/quiz/bedroom", {
+      const res = await fetch("https://starrymindx-production.up.railway.app/routes/quiz/bedroom", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
