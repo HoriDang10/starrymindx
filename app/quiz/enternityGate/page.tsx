@@ -81,7 +81,7 @@ export default function EternityGateQuiz() {
     setError(null);
 
     try {
-      const res = await fetch("http://localhost:3001/routes/quiz/eternity-gate", {
+      const res = await fetch("https://starrymindx-production.up.railway.app/routes/quiz/eternity-gate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ answers }),

@@ -42,7 +42,7 @@ export default function ChatPage() {
         .slice(-6)
         .map((m) => `${m.from === "user" ? "Người dùng" : "Bot"}: ${m.text}`);
 
-      const res = await fetch("http://localhost:3001/routes/ai/chat", {
+      const res = await fetch("https://starrymindx-production.up.railway.app/routes/ai/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text, context }),
